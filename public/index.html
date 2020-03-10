@@ -1,0 +1,21 @@
+<html>
+    <header>
+        <script src="socketio.js"></script>
+        <script src="json-viewer.js"></script>
+        <link rel="stylesheet" href="json-viewer.css">
+    </header>
+    <body>
+        <div id="json"></div>
+    </body>
+    <script>
+        const socket = io.connect('https://constellation-workshop.herokuapp.com/');
+
+        socket.on('constellation', data => {
+            const jsonViewer = new JSONViewer();
+            const divEl = document.createElement('div');
+            divEl.appendChild(jsonViewer.getContainer());
+            document.body.appendChild(divEl);
+            jsonViewer.showJSON(data, -1, 1);
+        });
+    </script>
+</html>
